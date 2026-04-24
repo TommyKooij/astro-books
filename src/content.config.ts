@@ -1,0 +1,15 @@
+import { glob } from "astro/loaders";
+import { defineCollection } from "astro:content";
+import { z } from 'astro/zod'
+
+const books = defineCollection({
+  loader: glob({ base: 'src/contents/books', pattern: '*.md' }),
+  schema: z.object({
+    title: z.string(),
+    author: z.string(),
+    rating: z.number(),
+    summary: z.string(),
+  })
+})
+
+export const collections = { books }
